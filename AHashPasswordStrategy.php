@@ -21,7 +21,7 @@ class AHashPasswordStrategy extends APasswordStrategy {
 	 * The hash method to use when encoding passwords
 	 * @var Callable
 	 */
-	public $hashMethod = array("sha1");
+	public $hashMethod = "sha1";
 
 	/**
 	 * Generates a random salt to use when noncing passwords
@@ -29,7 +29,7 @@ class AHashPasswordStrategy extends APasswordStrategy {
 	 */
 	protected function generateSalt()
 	{
-		return sha1(uniqid("",true));
+		return call_user_func_array($this->hashMethod,array(uniqid("",true)));
 	}
 
 	/**
@@ -42,7 +42,7 @@ class AHashPasswordStrategy extends APasswordStrategy {
 	{
 		$hash = $this->getSalt()."###".$password;
 		for($i = 0; $i < $this->workFactor; $i++) {
-			$hash = sha1($hash);
+			$hash = call_user_func_array($this->hashMethod,array($hash));
 		}
 		return $hash;
 	}
