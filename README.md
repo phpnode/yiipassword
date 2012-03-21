@@ -4,7 +4,7 @@ Password strategies are specifications for how passwords should be encoded and v
 and how complicated user supplied passwords should be. Out of the box it contains strategies
 for bcrypt and multiple rounds of hash functions e.g. sha1, as well as support for legacy password
 hashes like unsalted md5 and unsalted sha1. The aim is to allow multiple different password strategies to co-exist
-and to upgrade users from legacy hashes to new hashes when the login.
+and to upgrade users from legacy hashes to new hashes when they login.
 
 <h2>Why do I want this?</h2>
 
