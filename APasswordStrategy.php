@@ -72,7 +72,7 @@ abstract class APasswordStrategy extends CValidator {
 	 * The special characters that should appear in passwords if $minSpecialCharacters is set
 	 * @var array
 	 */
-	public $specialCharacters = array(" ","'","~","!","@","#","$","%","^","&","\*","(",")","_","-","\+","=","[","]","\\","\|","{","}",";",":",'"',"\.",",","\/","<",">","\?");
+	public $specialCharacters = array(" ","'","~","!","@","#","£","$","%","^","&","\*","(",")","_","-","\+","=","[","]","\\","\|","{","}",";",":",'"',"\.",",","\/","<",">","\?","`");
 	/**
 	 * @var string the salt to use for this password, if supported by this strategy
 	 */
