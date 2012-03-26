@@ -1,4 +1,5 @@
 <?php
+Yii::import("packages.passwordStrategy.*");
 /**
  * Provides password encoding and verification functionality for active records.
  * Also allows multiple password strategies to be used for the same model.
