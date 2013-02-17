@@ -1,0 +1,14 @@
+{
+    "name": "phpnode/YiiPassword",
+    "description": "Password strategies for the Yii PHP framework.",
+    "keywords": ["password", "bcrypt"],
+    "type": "yii-extension",
+    "license": "BSD-3-Clause",
+    "authors": [
+        {
+            "name": "Charles Pick",
+            "email": "charles.pick@gmail.com",
+            "homepage": "http://github.com/phpnode"
+        }
+    ]
+}
