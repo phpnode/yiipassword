@@ -1,5 +1,5 @@
 {
-    "name": "phpnode/YiiPassword",
+    "name": "phpnode/yiipassword",
     "description": "Password strategies for the Yii PHP framework.",
     "keywords": ["password", "bcrypt"],
     "type": "yii-extension",
