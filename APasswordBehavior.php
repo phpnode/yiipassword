@@ -177,18 +177,27 @@ class APasswordBehavior extends CActiveRecordBehavior {
 		return true;
 	}
 
-	/**
-	 * Changes the user's password and saves the record
-	 * @param string $password the plain text password to change to
-	 * @param boolean $runValidation whether to run validation or not
-	 * @return boolean true if the password was changed successfully
-	 */
-	public function changePassword($password, $runValidation = true)
-	{
-		$owner = $this->getOwner(); /* @var CActiveRecord $owner */
-		$this->changePasswordInternal($password);
-		return $owner->save($runValidation);
-	}
+    /**
+     * Changes the user's password and saves the record
+     * @param string $newPassword the plain text password to change to
+     * @param boolean $runValidation whether to run validation or not.
+     * If validate false, return false, and {UserModel} hasError(password).
+     * @return boolean true if the password was changed successfully
+     */
+    public function changePassword($newPassword, $runValidation = true)
+    {
+        $owner = $this->getOwner();
+        /* @var CActiveRecord $owner UserModel */
+        if ($runValidation) {
+            $owner->{$this->passwordAttribute} = $newPassword;
+            if ($owner->validate($this->passwordAttribute) === false) {
+                return false;
+            }
+        }
+        $this->changePasswordInternal($newPassword);
+
+        return $owner->save(false);
+    }
 
 	/**
 	 * Generates a password reset code to use for this user.
