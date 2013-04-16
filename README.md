@@ -62,3 +62,5 @@ By default, APasswordBehavior assumes that your model contains the following fie
 </ul>
 
 You can configure the field names on the behavior.
+
+Also info: Using Bcrypt Strategy For New Application? - https://github.com/phpnode/YiiPassword/issues/10
