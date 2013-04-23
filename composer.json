@@ -5,6 +5,16 @@
     "version": "0.0.1",
     "type": "yii-extension",
     "license": "BSD-3-Clause",
+    "autoload": {
+      "psr-0": {
+            "ABcryptPasswordStrategy": "",        
+            "AHashPasswordStrategy": "",
+            "ALegacyMd5PasswordStrategy": "",
+            "ALegacySha1PasswordStrategy": "",
+            "APasswordStrategy": "",
+            "APasswordBehavior": ""
+      }  
+    },
     "authors": [
         {
             "name": "Charles Pick",
