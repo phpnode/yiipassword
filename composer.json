@@ -2,6 +2,7 @@
     "name": "phpnode/yiipassword",
     "description": "Password strategies for the Yii PHP framework.",
     "keywords": ["password", "bcrypt"],
+    "version": "0.0.1",
     "type": "yii-extension",
     "license": "BSD-3-Clause",
     "authors": [
