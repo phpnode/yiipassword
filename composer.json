@@ -6,13 +6,13 @@
     "type": "yii-extension",
     "license": "BSD-3-Clause",
     "autoload": {
-      "psr-0": {
-            "ABcryptPasswordStrategy": "",        
-            "AHashPasswordStrategy": "",
-            "ALegacyMd5PasswordStrategy": "",
-            "ALegacySha1PasswordStrategy": "",
-            "APasswordStrategy": "",
-            "APasswordBehavior": ""
+      "classmap": [
+            "ABcryptPasswordStrategy.php",
+            "AHashPasswordStrategy.php",
+            "ALegacyMd5PasswordStrategy.php",
+            "ALegacySha1PasswordStrategy.php",
+            "APasswordStrategy.php",
+            "APasswordBehavior.php"
       }  
     },
     "authors": [
