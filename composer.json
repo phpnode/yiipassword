@@ -13,7 +13,7 @@
             "ALegacySha1PasswordStrategy.php",
             "APasswordStrategy.php",
             "APasswordBehavior.php"
-      }  
+      ]
     },
     "authors": [
         {
