@@ -207,7 +207,13 @@ class APasswordBehavior extends \CActiveRecordBehavior
 		}
 		$this->changePasswordInternal($newPassword);
 
-		return $owner->save(false);
+		/* saveAttributes instead of save to avoid trigger afterSave / beforeSave */
+		return $owner->saveAttributes(array(
+			$this->passwordAttribute,
+			$this->saltAttribute,
+			$this->strategyAttribute,
+		));
+
 	}
 
 	/**
