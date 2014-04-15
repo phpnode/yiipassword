@@ -6,6 +6,8 @@
  * @author Charles Pick
  * @package packages.passwordStrategy
  */
+namespace YiiPassword;
+
 class ABcryptPasswordStrategy extends APasswordStrategy
 {
 	/**
@@ -39,8 +41,7 @@ class ABcryptPasswordStrategy extends APasswordStrategy
 			$bytes = openssl_random_pseudo_bytes($count);
 		}
 		else if(
-			$bytes == ""
-			&& is_readable("/dev/urandom")
+			is_readable("/dev/urandom")
 			&& ($handle = fopen("/dev/urandom", "rb")) !== false
 		) {
 			$bytes = fread($handle,$count);

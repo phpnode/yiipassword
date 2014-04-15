@@ -5,6 +5,8 @@
  * @author Charles Pick
  * @package packages.passwordStrategy
  */
+namespace YiiPassword;
+
 class AHashPasswordStrategy extends APasswordStrategy {
 
 	/**

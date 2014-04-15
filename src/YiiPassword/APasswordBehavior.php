@@ -33,12 +33,15 @@
  * @author Charles Pick
  * @package packages.passwordStrategy
  */
-class APasswordBehavior extends CActiveRecordBehavior {
-	/**
-	 * The name of the attribute that contains the password salt
-	 * @var string
-	 */
-	public $saltAttribute = "salt";
+namespace YiiPassword;
+
+class APasswordBehavior extends \CActiveRecordBehavior
+{
+    /**
+     * The name of the attribute that contains the password salt
+     * @var string
+     */
+    public $saltAttribute = "salt";
 
 	/**
 	 * The name of the attribute that contains the encoded password
@@ -97,20 +100,20 @@ class APasswordBehavior extends CActiveRecordBehavior {
 	private $_hashedPassword;
 
 	/**
-	 * Sets the strategies to use
-	 * @param APasswordStrategy[]|array $strategies the strategies to add
-	 */
-	public function setStrategies($strategies)
-	{
-		foreach($strategies as $name => $strategy) {
-			if (!($strategy instanceof APasswordStrategy)) {
-				$strategy = Yii::createComponent($strategy);
-			}
-			$strategy->name = $name;
-			$strategies[$name] = $strategy;
-		}
-		$this->_strategies = $strategies;
-	}
+     * Sets the strategies to use
+     * @param APasswordStrategy[]|array $strategies the strategies to add
+     */
+    public function setStrategies($strategies)
+    {
+        foreach($strategies as $name => $strategy) {
+            if (!($strategy instanceof YiiPassword\APasswordStrategy)) {
+                $strategy = \Yii::createComponent($strategy);
+            }
+            $strategy->name = $name;
+            $strategies[$name] = $strategy;
+        }
+        $this->_strategies = $strategies;
+    }
 
 	/**
 	 * Gets the password strategies
