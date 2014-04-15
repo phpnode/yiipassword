@@ -81,6 +81,11 @@ abstract class APasswordStrategy extends \CValidator {
 	private $_salt;
 
 	/**
+	 * @var string the username for this password
+	 */
+	private $_username;
+
+	/**
 	 * Sets the salt to use with this strategy, if supported
 	 * @param string $salt the salt
 	 */
@@ -100,6 +105,24 @@ abstract class APasswordStrategy extends \CValidator {
 			$this->_salt = $this->generateSalt();
 		}
 		return $this->_salt;
+	}
+
+	/**
+	 * Sets the username to use with this strategy
+	 * @param  string $username the username
+	 */
+	public function setUsername($username)
+	{
+		$this->_username = $username;
+	}
+
+	/**
+	 * Gets the username to use with this strategt
+	 * @return string the username
+	 */
+	public function getUsername()
+	{
+		return $this->_username;
 	}
 
 	/**

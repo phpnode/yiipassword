@@ -11,13 +11,13 @@
  * $behavior = new APasswordBehavior;
  * $behavior->defaultStrategyName = "hash";
  * $behavior->strategies = array(
- * 	"hash" => array(
- *		"class" => "packages.passwordStrategy.AHashPasswordStrategy",
- * 		"minLength" => 8
+ *  "hash" => array(
+ *      "class" => "packages.passwordStrategy.AHashPasswordStrategy",
+ *      "minLength" => 8
  *  ),
- * 	"legacy" => array(
- * 		"class" => "packages.passwordStrategy.ALegacyMd5Strategy",
- * 		"minLength" => 8
+ *  "legacy" => array(
+ *      "class" => "packages.passwordStrategy.ALegacyMd5Strategy",
+ *      "minLength" => 8
  *  ),
  * );
  * $user->attachBehavior("APasswordBehavior", $behavior);
@@ -37,11 +37,17 @@ namespace YiiPassword;
 
 class APasswordBehavior extends \CActiveRecordBehavior
 {
-    /**
-     * The name of the attribute that contains the password salt
-     * @var string
-     */
-    public $saltAttribute = "salt";
+	/**
+	 * The name of the attribute that contains the password salt
+	 * @var string
+	 */
+	public $saltAttribute = "salt";
+
+	/**
+	 * The name of the username attribute
+	 * @var string
+	 */
+	public $usernameAttribute = "username";
 
 	/**
 	 * The name of the attribute that contains the encoded password
@@ -79,13 +85,13 @@ class APasswordBehavior extends \CActiveRecordBehavior
 	 * An array of supported password strategies.
 	 * <pre>
 	 * array(
-	 * 	"hash" => array(
-	 *		"class" => "packages.passwordStrategy.AHashPasswordStrategy",
-	 * 		"hashMethod" => array("sha1"),
-	 * 		"workFactor" => 50
-	 * 	),
-	 * 	"md5" => array(
-	 * 		"class" => "packages.passwordStrategy.ALegacyMd5PasswordStrategy"
+	 *  "hash" => array(
+	 *      "class" => "packages.passwordStrategy.AHashPasswordStrategy",
+	 *      "hashMethod" => array("sha1"),
+	 *      "workFactor" => 50
+	 *  ),
+	 *  "md5" => array(
+	 *      "class" => "packages.passwordStrategy.ALegacyMd5PasswordStrategy"
 	 *  ),
 	 * )
 	 * </pre>
@@ -100,20 +106,20 @@ class APasswordBehavior extends \CActiveRecordBehavior
 	private $_hashedPassword;
 
 	/**
-     * Sets the strategies to use
-     * @param APasswordStrategy[]|array $strategies the strategies to add
-     */
-    public function setStrategies($strategies)
-    {
-        foreach($strategies as $name => $strategy) {
-            if (!($strategy instanceof YiiPassword\APasswordStrategy)) {
-                $strategy = \Yii::createComponent($strategy);
-            }
-            $strategy->name = $name;
-            $strategies[$name] = $strategy;
-        }
-        $this->_strategies = $strategies;
-    }
+	 * Sets the strategies to use
+	 * @param APasswordStrategy[]|array $strategies the strategies to add
+	 */
+	public function setStrategies($strategies)
+	{
+		foreach($strategies as $name => $strategy) {
+			if (!($strategy instanceof YiiPassword\APasswordStrategy)) {
+				$strategy = \Yii::createComponent($strategy);
+			}
+			$strategy->name = $name;
+			$strategies[$name] = $strategy;
+		}
+		$this->_strategies = $strategies;
+	}
 
 	/**
 	 * Gets the password strategies
@@ -165,6 +171,9 @@ class APasswordBehavior extends \CActiveRecordBehavior
 		if ($this->saltAttribute) {
 			$strategy->setSalt($owner->{$this->saltAttribute});
 		}
+		if ($this->usernameAttribute) {
+			$strategy->setUsername($owner->{$this->usernameAttribute});
+		}
 		if (!$strategy->compare($password,$owner->{$this->passwordAttribute})) {
 			return false;
 		}
@@ -179,27 +188,27 @@ class APasswordBehavior extends \CActiveRecordBehavior
 		return true;
 	}
 
-    /**
-     * Changes the user's password and saves the record
-     * @param string $newPassword the plain text password to change to
-     * @param boolean $runValidation whether to run validation or not.
-     * If validate false, return false, and {UserModel} hasError(password).
-     * @return boolean true if the password was changed successfully
-     */
-    public function changePassword($newPassword, $runValidation = true)
-    {
-        $owner = $this->getOwner();
-        /* @var CActiveRecord $owner UserModel */
-        if ($runValidation) {
-            $owner->{$this->passwordAttribute} = $newPassword;
-            if ($owner->validate($this->passwordAttribute) === false) {
-                return false;
-            }
-        }
-        $this->changePasswordInternal($newPassword);
+	/**
+	 * Changes the user's password and saves the record
+	 * @param string $newPassword the plain text password to change to
+	 * @param boolean $runValidation whether to run validation or not.
+	 * If validate false, return false, and {UserModel} hasError(password).
+	 * @return boolean true if the password was changed successfully
+	 */
+	public function changePassword($newPassword, $runValidation = true)
+	{
+		$owner = $this->getOwner();
+		/* @var CActiveRecord $owner UserModel */
+		if ($runValidation) {
+			$owner->{$this->passwordAttribute} = $newPassword;
+			if ($owner->validate($this->passwordAttribute) === false) {
+				return false;
+			}
+		}
+		$this->changePasswordInternal($newPassword);
 
-        return $owner->save(false);
-    }
+		return $owner->save(false);
+	}
 
 	/**
 	 * Generates a password reset code to use for this user.
