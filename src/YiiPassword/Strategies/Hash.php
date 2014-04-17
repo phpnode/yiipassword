@@ -3,11 +3,13 @@
  * A password strategy based on multiple rounds of hashes.
  * The default implementation encodes passwords using 100 rounds of sha1
  * @author Charles Pick
- * @package packages.passwordStrategy
+ * @package packages.Strategy
  */
-namespace YiiPassword;
+namespace YiiPassword\Strategies;
 
-class AHashPasswordStrategy extends APasswordStrategy {
+use YiiPassword\Strategy;
+
+class Hash extends Strategy {
 
 	/**
 	 * The work factor used when hashing passwords.

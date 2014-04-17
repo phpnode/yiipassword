@@ -5,9 +5,13 @@
  * secure strategy.
  *
  * @author Arnaud Fabre
- * @package packages.passwordStrategy
+ * @package packages.Strategy
  */
-class AHttpDigestPasswordStrategy extends APasswordStrategy {
+namespace YiiPassword\Strategies;
+
+use YiiPassword\Strategy;
+
+class HttpDigest extends Strategy {
 	/**
 	 * The realm used for this strategy
 	 * @var string

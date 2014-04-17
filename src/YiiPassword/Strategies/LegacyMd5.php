@@ -8,9 +8,11 @@
  * @author Charles Pick
  * @package packages.passwordStrategy
  */
-namespace YiiPassword;
+namespace YiiPassword\Strategies;
 
-class ALegacyMd5PasswordStrategy extends APasswordStrategy
+use YiiPassword\Strategy;
+
+class LegacyMd5 extends Strategy
 {
 	/**
 	 * Encode a plain text password.

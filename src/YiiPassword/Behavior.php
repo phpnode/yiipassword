@@ -8,19 +8,19 @@
  *
  * <pre>
  * $user = new User;
- * $behavior = new APasswordBehavior;
+ * $behavior = new YiiPassword\Behavior;
  * $behavior->defaultStrategyName = "hash";
  * $behavior->strategies = array(
  *  "hash" => array(
- *      "class" => "packages.passwordStrategy.AHashPasswordStrategy",
+ *      "class" => "YiiPassword\Strategies\Hash",
  *      "minLength" => 8
  *  ),
  *  "legacy" => array(
- *      "class" => "packages.passwordStrategy.ALegacyMd5Strategy",
+ *      "class" => "YiiPassword\Strategies\LegacyMd5",
  *      "minLength" => 8
  *  ),
  * );
- * $user->attachBehavior("APasswordBehavior", $behavior);
+ * $user->attachBehavior("YiiPassword\Behavior", $behavior);
  * $user->password = "qwerty";
  * $user->validate(); // false - password too short
  * $user->clearErrors();
@@ -35,7 +35,7 @@
  */
 namespace YiiPassword;
 
-class APasswordBehavior extends \CActiveRecordBehavior
+class Behavior extends \CActiveRecordBehavior
 {
 	/**
 	 * The name of the attribute that contains the password salt
@@ -86,12 +86,12 @@ class APasswordBehavior extends \CActiveRecordBehavior
 	 * <pre>
 	 * array(
 	 *  "hash" => array(
-	 *      "class" => "packages.passwordStrategy.AHashPasswordStrategy",
+	 *      "class" => "YiiPassword\Strategies\Hash",
 	 *      "hashMethod" => array("sha1"),
 	 *      "workFactor" => 50
 	 *  ),
 	 *  "md5" => array(
-	 *      "class" => "packages.passwordStrategy.ALegacyMd5PasswordStrategy"
+	 *      "class" => "YiiPassword\Strategies\LegacyMd5"
 	 *  ),
 	 * )
 	 * </pre>
@@ -107,12 +107,12 @@ class APasswordBehavior extends \CActiveRecordBehavior
 
 	/**
 	 * Sets the strategies to use
-	 * @param APasswordStrategy[]|array $strategies the strategies to add
+	 * @param Strategy[]|array $strategies the strategies to add
 	 */
 	public function setStrategies($strategies)
 	{
 		foreach($strategies as $name => $strategy) {
-			if (!($strategy instanceof YiiPassword\APasswordStrategy)) {
+			if (!($strategy instanceof YiiPassword\Strategy)) {
 				$strategy = \Yii::createComponent($strategy);
 			}
 			$strategy->name = $name;

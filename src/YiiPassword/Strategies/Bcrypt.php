@@ -4,11 +4,13 @@
  * The default implementation uses a work factor of 12, you should adjust
  * this based on your security requirements
  * @author Charles Pick
- * @package packages.passwordStrategy
+ * @package packages.Strategy
  */
-namespace YiiPassword;
+namespace YiiPassword\Strategies;
 
-class ABcryptPasswordStrategy extends APasswordStrategy
+use YiiPassword\Strategy;
+
+class Bcrypt extends Strategy
 {
 	/**
 	 * The work factor used when hashing passwords.

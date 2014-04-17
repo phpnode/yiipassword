@@ -22,16 +22,16 @@ class User extends CActiveRecord
 	public function behaviors()
 	{
 		return array(
-			"APasswordBehavior" => array(
-				"class" => "APasswordBehavior",
+			"PasswordBehavior" => array(
+				"class" => "YiiPassword\Behavior",
 				"defaultStrategyName" => "bcrypt",
 				"strategies" => array(
 					"bcrypt" => array(
-						"class" => "ABcryptPasswordStrategy",
+						"class" => "YiiPassword\Strategies\Bcrypt",
 						"workFactor" => 14
 					),
 					"legacy" => array(
-						"class" => "ALegacyMd5PasswordStrategy",
+						"class" => "YiiPassword\Strategies\LegacyMd5",
 					)
 				),
 			)
@@ -53,10 +53,11 @@ you'd like to increase it to 15. Normally this would be quite difficult to accom
 signed up using the less secure hashes, but with password strategies, you can simply add another bcrpyt strategy with the
 desired work factor, set it to the default, and your users will be upgraded to the new strategy next time they login.
 
-By default, APasswordBehavior assumes that your model contains the following fields:
+By default, YiiPassword\Behavior assumes that your model contains the following fields:
 
-	* *salt* - holds the per user salt used for hashing passwords</li>
-	* *password* - holds the hashed password</li>
+	* *salt* - holds the per user salt used for hashing passwords
+	* *username* - holds the username
+	* *password* - holds the hashed password
 	* *passwordStrategy* - holds the name of the current password strategy for this user
 	* *requiresNewPassword* - a boolean field that determines whether the user should change their password or not
 
