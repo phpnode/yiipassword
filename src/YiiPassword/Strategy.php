@@ -11,7 +11,9 @@
  * @package packages.passwordStrategy
  * @author Charles Pick
  */
-abstract class APasswordStrategy extends CValidator {
+namespace YiiPassword;
+
+abstract class Strategy extends \CValidator {
 
 	/**
 	 * The name of this password strategy
@@ -79,6 +81,11 @@ abstract class APasswordStrategy extends CValidator {
 	private $_salt;
 
 	/**
+	 * @var string the username for this password
+	 */
+	private $_username;
+
+	/**
 	 * Sets the salt to use with this strategy, if supported
 	 * @param string $salt the salt
 	 */
@@ -98,6 +105,24 @@ abstract class APasswordStrategy extends CValidator {
 			$this->_salt = $this->generateSalt();
 		}
 		return $this->_salt;
+	}
+
+	/**
+	 * Sets the username to use with this strategy
+	 * @param  string $username the username
+	 */
+	public function setUsername($username)
+	{
+		$this->_username = $username;
+	}
+
+	/**
+	 * Gets the username to use with this strategt
+	 * @return string the username
+	 */
+	public function getUsername()
+	{
+		return $this->_username;
 	}
 
 	/**
@@ -192,10 +217,10 @@ abstract class APasswordStrategy extends CValidator {
 	 * If this strategy's complexity requirements are equal or greater than that
 	 * of the given strategy, then it can be upgraded. Otherwise the user must be
 	 * prompted to enter a new password that meets the complexity requirements.
-	 * @param APasswordStrategy $strategy the strategy to upgrade to
+	 * @param Strategy $strategy the strategy to upgrade to
 	 * @return boolean true if this strategy can be upgraded to the given strategy
 	 */
-	public function canUpgradeTo(APasswordStrategy $strategy) {
+	public function canUpgradeTo(Strategy $strategy) {
 		if ($strategy->minLength && $strategy->minLength > $this->minLength) {
 			return false;
 		}

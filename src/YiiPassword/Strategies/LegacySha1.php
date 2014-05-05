@@ -8,7 +8,12 @@
  * @author Charles Pick
  * @package packages.passwordStrategy
  */
-class ALegacySha1PasswordStrategy extends APasswordStrategy {
+namespace YiiPassword\Strategies;
+
+use YiiPassword\Strategy;
+
+class LegacySha1 extends Strategy
+{
 	/**
 	 * Encode a plain text password.
 	 * @param string $password the plain text password to encode

@@ -4,9 +4,13 @@
  * The default implementation uses a work factor of 12, you should adjust
  * this based on your security requirements
  * @author Charles Pick
- * @package packages.passwordStrategy
+ * @package packages.Strategy
  */
-class ABcryptPasswordStrategy extends APasswordStrategy
+namespace YiiPassword\Strategies;
+
+use YiiPassword\Strategy;
+
+class Bcrypt extends Strategy
 {
 	/**
 	 * The work factor used when hashing passwords.
@@ -39,8 +43,7 @@ class ABcryptPasswordStrategy extends APasswordStrategy
 			$bytes = openssl_random_pseudo_bytes($count);
 		}
 		else if(
-			$bytes == ""
-			&& is_readable("/dev/urandom")
+			is_readable("/dev/urandom")
 			&& ($handle = fopen("/dev/urandom", "rb")) !== false
 		) {
 			$bytes = fread($handle,$count);
@@ -55,10 +58,10 @@ class ABcryptPasswordStrategy extends APasswordStrategy
 				$value = $bytes;
 				for($i = 0; $i < 12; $i++) {
 					if (version_compare(PHP_VERSION, '5.4.0') >= 0) {
-                        $value = hash_hmac('sha1',microtime().$value,$key,true);
-                    } else {
-                        $value = hash_hmac('salsa20',microtime().$value,$key,true);
-                    }
+						$value = hash_hmac('sha1',microtime().$value,$key,true);
+					} else {
+						$value = hash_hmac('salsa20',microtime().$value,$key,true);
+					}
 					usleep(10); // make sure microtime() returns a new value
 				}
 				$bytes = substr($value,0,$count);

@@ -6,20 +6,13 @@
     "type": "yii-extension",
     "license": "BSD-3-Clause",
     "autoload": {
-      "classmap": [
-            "ABcryptPasswordStrategy.php",
-            "AHashPasswordStrategy.php",
-            "ALegacyMd5PasswordStrategy.php",
-            "ALegacySha1PasswordStrategy.php",
-            "APasswordStrategy.php",
-            "APasswordBehavior.php"
-      ]
-    },
-    "authors": [
-        {
-            "name": "Charles Pick",
-            "email": "charles.pick@gmail.com",
-            "homepage": "http://github.com/phpnode"
+        "psr-0": {
+            "YiiPassword": "src\/"
         }
-    ]
+    },
+    "authors": [{
+        "name": "Charles Pick",
+        "email": "charles.pick@gmail.com",
+        "homepage": "http://github.com/phpnode"
+    }]
 }
