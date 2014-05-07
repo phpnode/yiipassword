@@ -51,7 +51,7 @@ class Bcrypt extends Strategy
 		}
 
 		if (strlen($bytes) < $count) {
-			$key = uniqid(Yii::app()->name, true);
+			$key = uniqid(\Yii::app()->name, true);
 
 			// we need to pad with some pseudo random bytes
 			while(strlen($bytes) < $count) {
