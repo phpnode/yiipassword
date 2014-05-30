@@ -2,17 +2,24 @@
     "name": "phpnode/yiipassword",
     "description": "Password strategies for the Yii PHP framework.",
     "keywords": ["password", "bcrypt"],
-    "version": "0.0.1",
+    "version": "1.0.1",
     "type": "yii-extension",
     "license": "BSD-3-Clause",
+    "authors": [
+      {
+        "name": "Charles Pick",
+        "email": "charles.pick@gmail.com",
+        "homepage": "http://github.com/phpnode"
+      },
+      {
+        "name": "Christoffer Niska",
+        "email": "ChristofferNiska@gmail.com",
+        "homepage": "http://crisu83.me"
+      }
+    ],
     "autoload": {
         "psr-0": {
             "YiiPassword": "src\/"
         }
-    },
-    "authors": [{
-        "name": "Charles Pick",
-        "email": "charles.pick@gmail.com",
-        "homepage": "http://github.com/phpnode"
-    }]
+    }
 }
