@@ -1,4 +1,5 @@
 <?php
+
 /**
  * A base class for password strategies.
  *
@@ -11,6 +12,7 @@
  * @package packages.passwordStrategy
  * @author Charles Pick
  */
+
 namespace YiiPassword;
 
 abstract class Strategy extends \CValidator {
@@ -74,7 +76,8 @@ abstract class Strategy extends \CValidator {
 	 * The special characters that should appear in passwords if $minSpecialCharacters is set
 	 * @var array
 	 */
-	public $specialCharacters = array(" ","'","~","!","@","#","£","$","%","^","&","\*","(",")","_","-","\+","=","[","]","\\","\|","{","}",";",":",'"',"\.",",","\/","<",">","\?","`");
+	public $specialCharacters = array(" ", "'", "~", "!", "@", "#", "£", "$", "%", "^", "&", "\*", "(", ")", "_", "-", "\+", "=", "[", "]", "\\", "\|", "{", "}", ";", ":", '"', "\.", ",", "\/", "<", ">", "\?", "`");
+
 	/**
 	 * @var string the salt to use for this password, if supported by this strategy
 	 */
@@ -129,7 +132,8 @@ abstract class Strategy extends \CValidator {
 	 * Generates a random salt.
 	 * @return string|boolean the generated salt, or false if not supported by this strategy
 	 */
-	protected function generateSalt() {
+	protected function generateSalt()
+	{
 		return false;
 	}
 
@@ -144,55 +148,57 @@ abstract class Strategy extends \CValidator {
 		$password = $object->{$attribute};
 		$length = mb_strlen($password);
 		if ($this->minLength && $length < $this->minLength) {
-			$this->addError($object,$attribute,"{attribute} is too short, minimum is ".$this->minLength." characters.");
+
+			$this->addError($object, $attribute, Yii::t('yiipassword', "{attribute} is too short, minimum is {minLength} characters.", array('minLength' => $this->minLength)));
 			return false;
 		}
 		if ($this->maxLength && $length > $this->maxLength) {
-			$this->addError($object,$attribute,"{attribute} is too long, maximum is ".$this->maxLength." characters.");
+			$this->addError($object, $attribute, Yii::t('yiipassword', "{attribute} is too long, maximum is {maxLength} characters.", array('maxLength' => $this->maxLength)));
 			return false;
 		}
 		if ($this->minDigits) {
 			$digits = "";
-			if (preg_match_all("/[\d+]/u",$password,$matches)) {
-				$digits = implode("",$matches[0]);
+			if (preg_match_all("/[\d+]/u", $password, $matches)) {
+				$digits = implode("", $matches[0]);
 			}
 			if (mb_strlen($digits) < $this->minDigits) {
-				$this->addError($object,$attribute,"{attribute} should contain at least ".$this->minDigits." ".($this->minDigits == 1 ? "digit" : "digits"));
+				$this->addError($object, $attribute, Yii::t('yiipassword', "{attribute} should contain at least {minDigits} {digit}.", array('minDigits' => $this->minDigits, 'digit' => $this->minDigits == 1 ? Yii::t('yiipassword', 'digit') : Yii::t('yiipassword', 'digits'))));
 				return false;
 			}
 		}
 		if ($this->minUpperCaseLetters) {
 			$upper = "";
-			if (preg_match_all("/[A-Z]/u",$password,$matches)) {
-				$upper = implode("",$matches[0]);
+			if (preg_match_all("/[A-Z]/u", $password, $matches)) {
+				$upper = implode("", $matches[0]);
 			}
 			if (mb_strlen($upper) < $this->minUpperCaseLetters) {
-				$this->addError($object,$attribute,"{attribute} should contain at least ".$this->minUpperCaseLetters." upper case ".($this->minUpperCaseLetters == 1 ? "character" : "characters"));
+				$this->addError($object, $attribute, Yii::t('yiipassword', "{attribute} should contain at least {minUpperCaseLetters} upper case {character}.", array('minUpperCaseLetters' => $this->minUpperCaseLetters, 'character' => $this->minUpperCaseLetters == 1 ? Yii::t('yiipassword', 'character') : Yii::t('yiipassword', 'characters'))));
 				return false;
 			}
 		}
 		if ($this->minLowerCaseLetters) {
 			$lower = "";
-			if (preg_match_all("/[a-z]/u",$password,$matches)) {
-				$lower = implode("",$matches[0]);
+			if (preg_match_all("/[a-z]/u", $password, $matches)) {
+				$lower = implode("", $matches[0]);
 			}
 			if (mb_strlen($lower) < $this->minLowerCaseLetters) {
-				$this->addError($object,$attribute,"{attribute} should contain at least ".$this->minLowerCaseLetters." lower case ".($this->minLowerCaseLetters == 1 ? "character" : "characters"));
+				$this->addError($object, $attribute, Yii::t('yiipassword', "{attribute} should contain at least {minLowerCaseLetters} lower case {character}.", array('minLowerCaseLetters' => $this->minLowerCaseLetters, 'character' => $this->minLowerCaseLetters == 1 ? Yii::t('yiipassword', 'character') : Yii::t('yiipassword', 'characters'))));
 				return false;
 			}
 		}
 		if ($this->minSpecialCharacters) {
 			$special = "";
-			if (preg_match_all("/[".implode("|",$this->specialCharacters)."]/u",$password,$matches)) {
-				$special = implode("",$matches[0]);
+			if (preg_match_all("/[" . implode("|", $this->specialCharacters) . "]/u", $password, $matches)) {
+				$special = implode("", $matches[0]);
 			}
 			if (mb_strlen($special) < $this->minSpecialCharacters) {
-				$this->addError($object,$attribute,"{attribute} should contain at least ".$this->minSpecialCharacters." non alpha numeric ".($this->minSpecialCharacters == 1 ? "character" : "characters"));
+				$this->addError($object, $attribute, Yii::t('yiipassword', "{attribute} should contain at least {minSpecialCharacters} non alpha numeric {character}.", array('minSpecialCharacters' => $this->minSpecialCharacters, 'character' => $this->minSpecialCharacters == 1 ? Yii::t('yiipassword', 'character') : Yii::t('yiipassword', 'characters'))));
 				return false;
 			}
 		}
 		return true;
 	}
+
 	/**
 	 * Encode a plain text password.
 	 * Child classes should implement this method and do their encoding here
@@ -207,7 +213,8 @@ abstract class Strategy extends \CValidator {
 	 * @param string $encoded the encoded password to compare to
 	 * @return boolean true if the passwords are equal, otherwise false
 	 */
-	public function compare($password, $encoded) {
+	public function compare($password, $encoded)
+	{
 		$hash = $this->encode($password);
 		return $hash == $encoded;
 	}
@@ -220,7 +227,8 @@ abstract class Strategy extends \CValidator {
 	 * @param Strategy $strategy the strategy to upgrade to
 	 * @return boolean true if this strategy can be upgraded to the given strategy
 	 */
-	public function canUpgradeTo(Strategy $strategy) {
+	public function canUpgradeTo(Strategy $strategy)
+	{
 		if ($strategy->minLength && $strategy->minLength > $this->minLength) {
 			return false;
 		}
@@ -238,4 +246,5 @@ abstract class Strategy extends \CValidator {
 		}
 		return true;
 	}
+
 }
