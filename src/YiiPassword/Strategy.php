@@ -149,11 +149,11 @@ abstract class Strategy extends \CValidator {
 		$length = mb_strlen($password);
 		if ($this->minLength && $length < $this->minLength) {
 
-			$this->addError($object, $attribute, Yii::t('yiipassword', "{attribute} is too short, minimum is {minLength} characters.", array('minLength' => $this->minLength)));
+			$this->addError($object, $attribute, \Yii::t('yiipassword', "{attribute} is too short, minimum is {minLength} characters.", array('minLength' => $this->minLength)));
 			return false;
 		}
 		if ($this->maxLength && $length > $this->maxLength) {
-			$this->addError($object, $attribute, Yii::t('yiipassword', "{attribute} is too long, maximum is {maxLength} characters.", array('maxLength' => $this->maxLength)));
+			$this->addError($object, $attribute, \Yii::t('yiipassword', "{attribute} is too long, maximum is {maxLength} characters.", array('maxLength' => $this->maxLength)));
 			return false;
 		}
 		if ($this->minDigits) {
@@ -162,7 +162,7 @@ abstract class Strategy extends \CValidator {
 				$digits = implode("", $matches[0]);
 			}
 			if (mb_strlen($digits) < $this->minDigits) {
-				$this->addError($object, $attribute, Yii::t('yiipassword', "{attribute} should contain at least {minDigits} {digit}.", array('minDigits' => $this->minDigits, 'digit' => $this->minDigits == 1 ? Yii::t('yiipassword', 'digit') : Yii::t('yiipassword', 'digits'))));
+				$this->addError($object, $attribute, \Yii::t('yiipassword', "{attribute} should contain at least {minDigits} {digit}.", array('minDigits' => $this->minDigits, 'digit' => $this->minDigits == 1 ? \Yii::t('yiipassword', 'digit') : \Yii::t('yiipassword', 'digits'))));
 				return false;
 			}
 		}
@@ -172,7 +172,7 @@ abstract class Strategy extends \CValidator {
 				$upper = implode("", $matches[0]);
 			}
 			if (mb_strlen($upper) < $this->minUpperCaseLetters) {
-				$this->addError($object, $attribute, Yii::t('yiipassword', "{attribute} should contain at least {minUpperCaseLetters} upper case {character}.", array('minUpperCaseLetters' => $this->minUpperCaseLetters, 'character' => $this->minUpperCaseLetters == 1 ? Yii::t('yiipassword', 'character') : Yii::t('yiipassword', 'characters'))));
+				$this->addError($object, $attribute, \Yii::t('yiipassword', "{attribute} should contain at least {minUpperCaseLetters} upper case {character}.", array('minUpperCaseLetters' => $this->minUpperCaseLetters, 'character' => $this->minUpperCaseLetters == 1 ? \Yii::t('yiipassword', 'character') : \Yii::t('yiipassword', 'characters'))));
 				return false;
 			}
 		}
@@ -182,7 +182,7 @@ abstract class Strategy extends \CValidator {
 				$lower = implode("", $matches[0]);
 			}
 			if (mb_strlen($lower) < $this->minLowerCaseLetters) {
-				$this->addError($object, $attribute, Yii::t('yiipassword', "{attribute} should contain at least {minLowerCaseLetters} lower case {character}.", array('minLowerCaseLetters' => $this->minLowerCaseLetters, 'character' => $this->minLowerCaseLetters == 1 ? Yii::t('yiipassword', 'character') : Yii::t('yiipassword', 'characters'))));
+				$this->addError($object, $attribute, \Yii::t('yiipassword', "{attribute} should contain at least {minLowerCaseLetters} lower case {character}.", array('minLowerCaseLetters' => $this->minLowerCaseLetters, 'character' => $this->minLowerCaseLetters == 1 ? \Yii::t('yiipassword', 'character') : \Yii::t('yiipassword', 'characters'))));
 				return false;
 			}
 		}
@@ -192,7 +192,7 @@ abstract class Strategy extends \CValidator {
 				$special = implode("", $matches[0]);
 			}
 			if (mb_strlen($special) < $this->minSpecialCharacters) {
-				$this->addError($object, $attribute, Yii::t('yiipassword', "{attribute} should contain at least {minSpecialCharacters} non alpha numeric {character}.", array('minSpecialCharacters' => $this->minSpecialCharacters, 'character' => $this->minSpecialCharacters == 1 ? Yii::t('yiipassword', 'character') : Yii::t('yiipassword', 'characters'))));
+				$this->addError($object, $attribute, \Yii::t('yiipassword', "{attribute} should contain at least {minSpecialCharacters} non alpha numeric {character}.", array('minSpecialCharacters' => $this->minSpecialCharacters, 'character' => $this->minSpecialCharacters == 1 ? \Yii::t('yiipassword', 'character') : \Yii::t('yiipassword', 'characters'))));
 				return false;
 			}
 		}
