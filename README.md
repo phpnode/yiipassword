@@ -6,6 +6,12 @@ for bcrypt and multiple rounds of hash functions e.g. sha1, as well as support f
 hashes like unsalted md5 and unsalted sha1. The aim is to allow multiple different password strategies to co-exist
 and to upgrade users from legacy hashes to new hashes when they login.
 
+## Instalation
+
+Install compser (following instructions from https://getcomposer.org/) then run:
+
+    composer require phpnode/yiipassword
+
 ## Why do I want this?
 
 Imagine that you have a legacy application that uses simple, unsalted md5 based password
